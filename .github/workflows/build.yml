@@ -21,9 +21,6 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Install Android SDK packages
-        run: yes | sdkmanager "platforms;android-35" "build-tools;35.0.0" >/dev/null
-
       - name: Check for private data and forbidden files
         run: ./scripts/privacy-check.sh
 
