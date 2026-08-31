@@ -88,13 +88,15 @@ if [[ -n "${APK_KEYSTORE:-}" ]]; then
     : "${APK_KEY_PASSWORD:?Set APK_KEY_PASSWORD when APK_KEYSTORE is set}"
     KEYSTORE="$APK_KEYSTORE"
     KEY_ALIAS="$APK_KEY_ALIAS"
-    STORE_PASSWORD="$APK_KEYSTORE_PASSWORD"
-    KEY_PASSWORD="$APK_KEY_PASSWORD"
+    STORE_PASSWORD_SPEC="env:APK_KEYSTORE_PASSWORD"
+    KEY_PASSWORD_SPEC="env:APK_KEY_PASSWORD"
 else
     KEYSTORE="$BUILD_DIR/debug.keystore"
     KEY_ALIAS="androiddebugkey"
     STORE_PASSWORD="android"
     KEY_PASSWORD="android"
+    STORE_PASSWORD_SPEC="pass:$STORE_PASSWORD"
+    KEY_PASSWORD_SPEC="pass:$KEY_PASSWORD"
     keytool -genkeypair \
         -keystore "$KEYSTORE" \
         -storepass "$STORE_PASSWORD" \
@@ -110,8 +112,8 @@ fi
 "$APKSIGNER" sign \
     --ks "$KEYSTORE" \
     --ks-key-alias "$KEY_ALIAS" \
-    --ks-pass "pass:$STORE_PASSWORD" \
-    --key-pass "pass:$KEY_PASSWORD" \
+    --ks-pass "$STORE_PASSWORD_SPEC" \
+    --key-pass "$KEY_PASSWORD_SPEC" \
     --out "$OUTPUT_APK" \
     "$ALIGNED_APK"
 

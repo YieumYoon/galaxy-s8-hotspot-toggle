@@ -19,6 +19,20 @@ firmware build that has been verified so far, without root access or a SIM card.
 Other variants are unverified. See [Compatibility](docs/compatibility.md) before
 testing another phone.
 
+## Download
+
+Download the current release APK from
+[GitHub Releases](https://github.com/YieumYoon/galaxy-s8-hotspot-toggle/releases/latest/download/galaxy-s8-hotspot-toggle.apk).
+
+Official release APKs use this signing-certificate SHA-256 fingerprint:
+
+```text
+FA:AF:A6:8E:C9:EE:AA:5C:50:DC:90:13:4F:1E:A0:C0:1E:EE:57:8A:F3:7B:D8:E5:C4:C9:81:98:10:3D:C5:63
+```
+
+Compare the fingerprint with `apksigner verify --print-certs` before installing
+an APK obtained from anywhere other than this repository.
+
 ## What it does
 
 - Requests no Android permissions.
